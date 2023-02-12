@@ -1,0 +1,47 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <string>
+
+struct Anniversary {
+int day;
+int month;
+int year;
+};
+
+std::map<std::string, Anniversary> anniversary_list;
+
+void add_anniversary(std::string name, int day, int month, int year) {
+anniversary_list[name] = {day, month, year};
+}
+
+void edit_anniversary(std::string name, int day, int month, int year) {
+anniversary_list[name] = {day, month, year};
+}
+
+void display_anniversary(std::string name) {
+Anniversary anniversary = anniversary_list[name];
+std::cout << name << " celebrates their anniversary on " << anniversary.day << "/" << anniversary.month << "/" << anniversary.year << std::endl;
+}
+
+void display_monthly_anniversaries(int month) {
+std::cout << "Anniversaries in month " << month << ":" << std::endl;
+for (const auto& [name, anniversary] : anniversary_list) {
+if (anniversary.month == month) {
+std::cout << name << " on " << anniversary.day << std::endl;
+}
+}
+}
+
+int main() {
+add_anniversary("John Doe", 15, 7, 2000);
+add_anniversary("Jane Doe", 20, 12, 2005);
+add_anniversary("Bob Smith", 5, 3, 1990);
+add_anniversary("Rajendra Patel", 10, 8, 2010);
+add_anniversary("Tom Davis", 25, 2, 2015);
+
+display_anniversary("John Doe");
+display_monthly_anniversaries(7);
+
+return 0;
+}
